@@ -37,6 +37,7 @@ public class ExportTest {
 	private String[] args;
 	private File file;
 	private Export export = new Export();
+	private final static String ALF_DATA = "./alf_data";
 
 	@Before
 	public void setUp() throws Exception {
@@ -54,9 +55,9 @@ public class ExportTest {
 		args[10] = "-zip";
 		args[11] = "test";
 		file = new File(args[11] + ".acp");
-		setProperty("dir.root", "./alf_data");
-		setProperty("db.url",
-				"jdbc:h2:./alf_data;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=10000;MVCC=FALSE;LOCK_MODE=0");
+		setProperty("dir.root", ALF_DATA);
+		setProperty("db.url", "jdbc:h2:./" + ALF_DATA
+				+ ";AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=10000;MVCC=FALSE;LOCK_MODE=0");
 
 	}
 
@@ -81,6 +82,7 @@ public class ExportTest {
 	private void deleteFile() {
 		if (file != null && file.exists()) {
 			file.delete();
+			new File(ALF_DATA).delete();
 		}
 	}
 }
